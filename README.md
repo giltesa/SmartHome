@@ -1,6 +1,6 @@
 # SmartHome
 
-**SmartHome** es la segunda versión de mi proyecto de **hardware** para la automatización del hogar, esta vez por comunicación inalámbrica y compatible con [**MySensors**(https://github.com/mysensors/MySensors/tree/master).
+**SmartHome** es la segunda versión de mi proyecto de **hardware** para la automatización del hogar, esta vez por comunicación inalámbrica y compatible con [**MySensors**](https://github.com/mysensors/MySensors/tree/master).
 
 
 ## Empezando
@@ -17,7 +17,7 @@ Los nodos funcionan por comunicación inalámbrica RF a 2.4Ghz distinta del WiFi
 Ademas del Gateway también es necesario un software de gestión que controle todos los nodos, este software puede ser cualquiera que soporte nodos programados con la librería MySensors, en el apartado [controlador](https://www.mysensors.org/controller) hay documentada una tabla de softwares de gestión compatibles.
 
 
-## Lista de nodos (todos en desarrollo)
+## Lista de nodos
 
 Esta es la lista de todos los nodos con un estado de desarrollo avanzado pero no finalizado. Para consultar su estado actual o próximos nodos que desarrollare visitar este panel de trabajo: [Trello SmartHome](https://trello.com/b/6nWJ42Qx/smarthome)
 
