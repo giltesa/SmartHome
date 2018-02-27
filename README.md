@@ -3,7 +3,7 @@
 **SmartHome** es la segunda versión de mi proyecto de **hardware** para la automatización del hogar, esta vez por comunicación inalámbrica y compatible con [**MySensors**](https://github.com/mysensors/MySensors/tree/master).
 
 
-## Empezando
+## Introducción
 
 En este repositorio encontraras la documentación para construir los diferentes nodos disponibles, eso incluye los esquemáticos, los circuitos, los garberas, piezas en 3D, código fuente, etc.
 
@@ -30,4 +30,4 @@ Esta es la lista de todos los nodos con un estado de desarrollo avanzado pero no
 
 ## Licencia
 
-Este proyecto está licenciado bajo la licencia **Creative Commons** de tipo: [Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES)**. Consulte el archivo [LICENSE.md](LICENSE.md) para obtener más información.
+Este proyecto está licenciado bajo la licencia **Creative Commons** de tipo: **[Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES)**. Consulte el archivo [LICENSE.md](LICENSE.md) para obtener más información.
