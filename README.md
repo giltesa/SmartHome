@@ -5,7 +5,7 @@
 
 ## Empezando
 
-En este repositorio encontraras la documentación para construir los diferentes nodos disponibles, eso incluye los esquemáticos, los circuitos, los garberas, piezas en 3D, código fuente, etc. t**todo ello sujeto bajo una licencia **Creative Commonsde** de tipo: [Reconocimiento - No Comercial - Compartir Igual 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES)**
+En este repositorio encontraras la documentación para construir los diferentes nodos disponibles, eso incluye los esquemáticos, los circuitos, los garberas, piezas en 3D, código fuente, etc.
 
 La funcionalidad de los nodos varia dependiendo de la tarea para la que hayan sido construidos. Por ejemplo encontraras un nodo de interruptor táctil para sustituir los interruptores de la pared y que permite encender, apagar y *regular el brillo(en desarrollo)* de las lamparas del techo de las habitaciones. También encontraras un nodo para tomar mediciones de temperatura, humedad y luz así como capaz de detectar eventos como la apertura y cierre de puertas y ventanas. Un poco mas abajo hay disponible una lista de todos los nodos diseñados.
 
@@ -26,3 +26,8 @@ Esta es la lista de todos los nodos con un estado de desarrollo avanzado pero no
 * Sensor multiuso
 * Mando a distancia
 * Regulador de luz LED RGBW
+
+
+## Licencia
+
+Este proyecto está licenciado bajo la licencia **Creative Commons** de tipo: [Reconocimiento-NoComercial-CompartirIgual 4.0 Internacional (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/3.0/deed.es_ES)**. Consulte el archivo [LICENSE.md](LICENSE.md) para obtener más información.
