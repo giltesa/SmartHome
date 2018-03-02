@@ -1,0 +1,28 @@
+
+--- 2018/03 -------------------------------------------------------------------------------------------------
+
+    + TOUCH SWITCH BOARD V2.2:
+        - Change pinout.
+
+    + RELAY SWITCH BOARD V1.2:
+        - Change AC connectors by ones at an angle of 90º (and modify the plastic shell with the new design)
+        - Change encapsulated for AMS1117 to SOT89 (To match the triacs PCB)
+
+
+--- 2017/12 -------------------------------------------------------------------------------------------------
+
+    + TOUCH SWITCH BOARD V2.1:
+        - Move programming connector to the inside of the board, it was colliding with the plastic housing.
+        - Modify the pinout of the RGB LED, the green and blue colors of the reverse.
+        - Add text that identifies the functionality of the board.
+
+    + RELAY SWITCH BOARD V1.1:
+        - Replace SSR relay with 5A mechanical relays.
+        - Add text that identifies the functionality of the board.
+
+
+--- 2017/10 INITIAL VERSION ---------------------------------------------------------------------------------
+
+    + TOUCH SWITCH BOARD V2.0.
+
+    + RELAY SWITCH BOARD V1.0.
