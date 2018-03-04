@@ -5,7 +5,7 @@
 
 ## Introducción
 
-En este repositorio encontraras la documentación para construir los diferentes nodos disponibles, eso incluye los esquemáticos, los circuitos, los garberas, piezas en 3D, código fuente, etc.
+En este repositorio encontraras la documentación para construir los diferentes nodos disponibles, eso incluye los esquemáticos, los circuitos, los gerbers, piezas en 3D, código fuente, etc.
 
 La funcionalidad de los nodos varia dependiendo de la tarea para la que hayan sido construidos. Por ejemplo encontraras un nodo de interruptor táctil para sustituir los interruptores de la pared y que permite encender, apagar y *regular el brillo(en desarrollo)* de las lamparas del techo de las habitaciones. También encontraras un nodo para tomar mediciones de temperatura, humedad y luz así como capaz de detectar eventos como la apertura y cierre de puertas y ventanas. Un poco mas abajo hay disponible una lista de todos los nodos diseñados.
 
