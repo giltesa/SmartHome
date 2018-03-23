@@ -8,6 +8,9 @@
         - Change AC connectors by ones at an angle of 90º (and modify the plastic shell with the new design)
         - Change encapsulated for AMS1117 to SOT89 (To match the triacs PCB)
 
+    + TRIAC SWITCH BOARD V1.0:
+        - Initial version
+
 
 --- 2017/12 -------------------------------------------------------------------------------------------------
 
@@ -23,6 +26,6 @@
 
 --- 2017/10 INITIAL VERSION ---------------------------------------------------------------------------------
 
-    + TOUCH SWITCH BOARD V2.0.
+    + TOUCH SWITCH BOARD V2.0
 
-    + RELAY SWITCH BOARD V1.0.
+    + RELAY SWITCH BOARD V1.0
