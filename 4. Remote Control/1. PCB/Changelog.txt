@@ -1,4 +1,12 @@
 
+--- 2018/04 -------------------------------------------------------------------------------------------------
+
+    + REMOTE CONTROL V1.1.
+        - Change the encapsulation of the microcontroller from QFN28 to MLF32... I got confused and it is cheaper to make the boards again than to buy the correct microcontrollers.
+        - Make the PCB with 1mm thickness.
+        - Change the button component from 6x6 to 5x5mm
+        - Adjust the size of the PCB so that it is as close as possible to the housing.
+
 --- 2018/03 INITIAL VERSION ---------------------------------------------------------------------------------
 
     + REMOTE CONTROL V1.0.
