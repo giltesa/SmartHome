@@ -54,8 +54,8 @@
 #include <DallasTemperature.h>
 #include <AsyncTaskLib.h>
 
-MyMessage msgR1(MS_RELAY1_CHILD_ID, V_TRIPPED);
-MyMessage msgR2(MS_RELAY2_CHILD_ID, V_TRIPPED);
+MyMessage msgR1(MS_RELAY1_CHILD_ID, V_STATUS);
+MyMessage msgR2(MS_RELAY2_CHILD_ID, V_STATUS);
 MyMessage msgT1(MS_TEMP_CHILD_ID,   V_TEMP);
 
 OneWire oneWire(pDS18B20);

@@ -1,10 +1,11 @@
 /**
  * Name:     Smarthome: Touch Switch Two Light (MySensors)
  * Autor:    Alberto Gil Tesa
- * Web:      https://giltesa.com/?p=18460
- * License:  CC BY-NC-SA 3.0
+ * Web:      https://giltesa.com/smarthome
+ *           https://giltesa.com/?p=18460
+ * License:  CC BY-NC-SA 4.0
  * Version:  1.2
- * Date:     2018/02/11
+ * Date:     2018/03/07
  *
  */
 
@@ -39,7 +40,7 @@
 #define MY_RF24_CS_PIN              pNRF_CS     // Define this to change the chip select pin from the default
 //#define MY_REPEATER_FEATURE                   // Enable repeater functionality for this node
 #define MY_OTA_FIRMWARE_FEATURE                 // Define this in sketch to allow safe over-the-air firmware updates
-//#define MY_OTA_FLASH_SS           pFLASH_CS   // Slave select pin for external flash.
+//#define MY_OTA_FLASH_SS           pFLASH_CS   // Slave select pin for external flash. (The bootloader must use the same pin)
 #define MY_OTA_FLASH_JDECID         0xEF30      // https://forum.mysensors.org/topic/4267/w25x40clsnig-as-flash-for-ota
 
 #define MS_BOARD_NAME               "Touch Switch: Two light"
@@ -54,12 +55,11 @@
 #include <DallasTemperature.h>
 #include <AsyncTaskLib.h>
 
-MyMessage msgR1(MS_RELAY1_CHILD_ID, V_TRIPPED);
-MyMessage msgR2(MS_RELAY2_CHILD_ID, V_TRIPPED);
+MyMessage msgR1(MS_RELAY1_CHILD_ID, V_STATUS);
+MyMessage msgR2(MS_RELAY2_CHILD_ID, V_STATUS);
 MyMessage msgT1(MS_TEMP_CHILD_ID,   V_TEMP);
 
-OneWire oneWire(pDS18B20);
-DallasTemperature ds18b20(&oneWire);
+DallasTemperature ds18b20(new OneWire(pDS18B20));
 
 AsyncTask *taskOn, *taskOff, *taskTemp;
 byte brightnessLed = 255;
@@ -101,8 +101,8 @@ void setup()
 {
     ds18b20.begin();
 
-    taskOn   = new AsyncTask(5000, [](){ setLedColor('B');   });
-    taskOff  = new AsyncTask(1000, [](){ refreshLedStatus(); });
+    taskOn  = new AsyncTask(4000, [](){ setLedColor('B');   });
+    taskOff = new AsyncTask(1000, [](){ refreshLedStatus(); });
 
     #ifdef MY_DEBUG
         taskTemp = new AsyncTask(60000, true, [](){ sendTemperature(); });
@@ -139,7 +139,9 @@ void presentation()
  */
 void loop()
 {
-    taskTemp->Update();
+    #ifdef MY_DEBUG
+        taskTemp->Update();
+    #endif
 
 
     //In case of problems in the wireless connection, the LED flashes blue.
@@ -256,7 +258,7 @@ void receive(const MyMessage &message)
     }
     else if( message.sensor == MS_LEDPWM_CHILD_ID && message.type == V_DIMMER )
     {
-        brightnessLed = map(atoi(message.data), 0, 100, 25, 255);
+        brightnessLed = map(message.getInt(), 0, 100, 25, 255);
         refreshLedStatus();
     }
 }
@@ -269,16 +271,7 @@ void receive(const MyMessage &message)
 void sendTemperature()
 {
     ds18b20.requestTemperatures();
-
-    float temperature1 = static_cast<float>(static_cast<int>((getControllerConfig().isMetric ? sensors.getTempCByIndex(0) : sensors.getTempFByIndex(0) ) * 10.)) / 10.;
-    float temperature2 = getControllerConfig().isMetric ? sensors.getTempCByIndex(0) : sensors.getTempFByIndex(0);
-
-    #ifdef MY_DEBUG
-        Serial.print("temperature1= "); Serial.println(temperature1);
-        Serial.print("temperature2= "); Serial.println(temperature2);
-    #endif
-
-    send(msgT1.setSensor(0).set(temperature2,1));
+    send(msgT1.set(getControllerConfig().isMetric ? ds18b20.getTempCByIndex(0) : ds18b20.getTempFByIndex(0), 1));
 }
 
 
@@ -324,7 +317,7 @@ void setLedColor( char color )
         case 'B':   //BLUE
             digitalWrite(pLED_RED,   LOW);
             digitalWrite(pLED_GREEN, LOW);
-            digitalWrite(pLED_BLUE,  brightnessLed);
+            analogWrite(pLED_BLUE,  brightnessLed);
             break;
         case 'Y':   //YELLOW
             analogWrite(pLED_RED,    brightnessLed);
@@ -332,9 +325,9 @@ void setLedColor( char color )
             digitalWrite(pLED_BLUE,  LOW);
             break;
         case 'W':   //WHITE
-            digitalWrite(pLED_RED,   brightnessLed);
-            digitalWrite(pLED_GREEN, brightnessLed);
-            digitalWrite(pLED_BLUE,  brightnessLed);
+            analogWrite(pLED_RED,   brightnessLed);
+            analogWrite(pLED_GREEN, brightnessLed);
+            analogWrite(pLED_BLUE,  brightnessLed);
             break;
         default:    //OFF
             digitalWrite(pLED_RED,   LOW);
