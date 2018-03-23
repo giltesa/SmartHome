@@ -4,7 +4,7 @@
  * Web:      https://giltesa.com/smarthome
  * License:  CC BY-NC-SA 4.0
  * Version:  1.0
- * Date:     2018/03/22
+ * Date:     2018/03/24
  *
  */
 
@@ -37,7 +37,7 @@
 #define MY_RF24_CE_PIN                  pNRF_CE     // Define this to change the chip enable pin from the default
 #define MY_RF24_CS_PIN                  pNRF_CS     // Define this to change the chip select pin from the default
 //#define MY_REPEATER_FEATURE                       // Enable repeater functionality for this node
-#define MY_SMART_SLEEP_WAIT_DURATION_MS	1000        //The wait period (in ms) before going to sleep when using smartSleep-functions.
+#define MY_SMART_SLEEP_WAIT_DURATION_MS	1000        // The wait period (in ms) before going to sleep when using smartSleep-functions.
 #define MY_OTA_FIRMWARE_FEATURE                     // Define this in sketch to allow safe over-the-air firmware updates
 #define MY_OTA_FLASH_SS                 pFLASH_CS   // Slave select pin for external flash. (The bootloader must use the same pin)
 #define MY_OTA_FLASH_JDECID             0xEF30      // https://forum.mysensors.org/topic/4267/w25x40clsnig-as-flash-for-ota
@@ -127,18 +127,15 @@ void loop()
         taskOn->Update(*taskOff);
         taskOff->Update(*taskOn);
     }
-    else if( taskOn->IsActive() )
+    else if( taskOn->IsActive() || taskOff->IsActive() )
     {
         taskOn->Stop();
+        taskOff->Stop();
         digitalWrite(pLED_BLUE, LOW);
     }
     else
     {
-        byte valueSleep = smartSleep(digitalPinToInterrupt(pEXP_D2_INT1), HIGH, MS_SLEEP_TIME);
-
-        #ifdef MY_DEBUG
-            Serial.print(">>> valueSleep = "); Serial.println(valueSleep);
-        #endif
+        int valueSleep = smartSleep(digitalPinToInterrupt(pEXP_D2_INT1), HIGH, MS_SLEEP_TIME);
 
         if( valueSleep == MY_SLEEP_NOT_POSSIBLE )
         {
@@ -154,28 +151,29 @@ void loop()
             #endif
             send(msgDOOR.set(true));
         }
-        else //if( valueSleep == MY_WAKE_UP_BY_TIMER ) //ERROR?: valueSleep always returns 255, it should have the value of the constant!
+        else if( valueSleep == MY_WAKE_UP_BY_TIMER )
         {
             #ifdef MY_DEBUG
                 Serial.println(">>> Sensors active");
             #endif
 
-            //Temperature:
+            //Temperature, Humidity, Light, Battery level:
             send(msgTEMP.set(getControllerConfig().isMetric ? htu.readTemperature() : ((htu.readTemperature() * 9.0) / 5.0 + 32), 1));
-
-            //Humidity:
             send(msgHUMI.set(htu.readHumidity(), 1));
-
-            //Light:
             send(msgLIGHT.set(bh.readLightLevel()));
-
-            //Battery level:
             sendBatteryLevel(getBatteryLevel());
         }
+        else
+        {
+            #ifdef MY_DEBUG
+                Serial.print(">>> valueSleep = "); Serial.println(valueSleep);
+            #endif
+        }
+
     }
 
     #ifdef MY_DEBUG
-        Serial.println(">>> HI?"); //This is only printed every MS_SLEEP_TIME, so it seems that the node sleeps correctly.
+        Serial.println(">>> HI?"); //If the node is sleeping correctly, this will only be printed every MS_SLEEP_TIME.
     #endif
 }
 

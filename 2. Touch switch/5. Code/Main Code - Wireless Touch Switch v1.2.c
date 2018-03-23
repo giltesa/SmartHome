@@ -5,7 +5,7 @@
  *           https://giltesa.com/?p=18460
  * License:  CC BY-NC-SA 4.0
  * Version:  1.2
- * Date:     2018/03/07
+ * Date:     2018/03/24
  *
  */
 
@@ -153,9 +153,10 @@ void loop()
         taskOn->Update(*taskOff);
         taskOff->Update(*taskOn);
     }
-    else if( taskOn->IsActive() )
+    else if( taskOn->IsActive() || taskOff->IsActive() )
     {
         taskOn->Stop();
+        taskOff->Stop();
         refreshLedStatus();
     }
 

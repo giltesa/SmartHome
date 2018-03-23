@@ -4,7 +4,7 @@
  * Web:      https://giltesa.com/smarthome
  * License:  CC BY-NC-SA 4.0
  * Version:  1.0
- * Date:     2018/03/22
+ * Date:     2018/03/24
  *
  */
 
@@ -132,11 +132,11 @@ void loop()
         }
         taskOn->Update(*taskOff);
         taskOff->Update(*taskOn);
-
     }
-    else if( taskOn->IsActive() )
+    else if( taskOn->IsActive() || taskOff->IsActive() )
     {
         taskOn->Stop();
+        taskOff->Stop();
         setLedColor('0');
     }
 }
