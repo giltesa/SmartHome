@@ -2,6 +2,8 @@
 
 **SmartHome** es la segunda versión de mi proyecto de **hardware** para la automatización del hogar, esta vez por comunicación inalámbrica y compatible con [**MySensors**](https://github.com/mysensors/MySensors/tree/master).
 
+![Banner SmartHome](https://raw.github.com/giltesa/SmartHome/blob/master/banner.png)
+
 
 ## Introducción
 
