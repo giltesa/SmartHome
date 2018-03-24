@@ -1,5 +1,5 @@
 /**
- * Name:     Smarthome: Touch Switch Two Light (MySensors)
+ * Name:     Smarthome: Touch Switch Two Light
  * Autor:    Alberto Gil Tesa
  * Web:      https://giltesa.com/smarthome
  *           https://giltesa.com/?p=18460

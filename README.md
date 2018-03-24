@@ -9,14 +9,14 @@
 
 En este repositorio encontraras la documentación para construir los diferentes nodos disponibles, eso incluye los esquemáticos, los circuitos, los gerbers, piezas en 3D, código fuente, etc.
 
-La funcionalidad de los nodos varia dependiendo de la tarea para la que hayan sido construidos. Por ejemplo encontraras un nodo de interruptor táctil para sustituir los interruptores de la pared y que permite encender, apagar y *regular el brillo(en desarrollo)* de las lamparas del techo de las habitaciones. También encontraras un nodo para tomar mediciones de temperatura, humedad y luz así como capaz de detectar eventos como la apertura y cierre de puertas y ventanas. Un poco mas abajo hay disponible una lista de todos los nodos diseñados.
+La funcionalidad de los nodos varia dependiendo de la tarea para la que hayan sido construidos. Por ejemplo encontraras un nodo de interruptor táctil para sustituir los interruptores de la pared y que permite encender, apagar y *regular el brillo (en desarrollo)* de las lamparas del techo de las habitaciones. También encontraras un nodo para tomar mediciones de temperatura, humedad y luz así como capaz de detectar eventos como la apertura y cierre de puertas y ventanas. Un poco mas abajo hay disponible una lista de todos los nodos diseñados.
 
 
 ### Requisitos previos
 
 Los nodos funcionan por comunicación inalámbrica RF a 2.4Ghz distinta del WiFi por lo que hace falta un Gateway capaz de convertir esa comunicación inalámbrica a cableada y viceversa, esto tiene como inconveniente que hace falta un aparato mas pero tiene como ventaja que no sobrecargaremos el router WiFi con una treintena de nodos conectados al mismo tiempo.
 
-Ademas del Gateway también es necesario un software de gestión que controle todos los nodos, este software puede ser cualquiera que soporte nodos programados con la librería MySensors, en el apartado [controlador](https://www.mysensors.org/controller) hay documentada una tabla de softwares de gestión compatibles.
+Además del Gateway también es necesario un software de gestión que controle todos los nodos, este software puede ser cualquiera que soporte nodos programados con la librería MySensors, en el apartado [controlador](https://www.mysensors.org/controller) hay documentada una tabla de softwares de gestión compatibles.
 
 
 ## Lista de nodos

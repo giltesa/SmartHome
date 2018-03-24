@@ -1,10 +1,10 @@
 /**
- * Name:     Smarthome: Remote Control (MySensors)
+ * Name:     Smarthome: Remote Control
  * Autor:    Alberto Gil Tesa
  * Web:      https://giltesa.com/smarthome
  * License:  CC BY-NC-SA 3.0
  * Version:  1.0
- * Date:     2018/03/04
+ * Date:     2018/03/24
  *
  */
 
@@ -33,12 +33,10 @@
 #define MS_BOARD_NAME       "Remote Control"
 #define MS_SOFTWARE_VERSION "1.0"
 #define MS_BTN_CHILD_ID     0
-#define MS_BAT_CHILD_ID     1
 
 #include <MySensors.h>
 
 MyMessage msgBTN(MS_BTN_CHILD_ID, V_TRIPPED);
-MyMessage msgBAT(MS_BAT_CHILD_ID, V_VAR);
 
 
 
@@ -59,8 +57,7 @@ void setup()
 void presentation()
 {
     sendSketchInfo(MS_BOARD_NAME, MS_SOFTWARE_VERSION);
-    present(MS_BTN_CHILD_ID, S_DOOR);
-    present(MS_BAT_CHILD_ID, S_POWER);
+    present(MS_BTN_CHILD_ID, S_DOOR, "Switch");
 }
 
 
@@ -70,18 +67,34 @@ void presentation()
  */
 void loop()
 {
-    if( digitalRead(pBTN) )
-    {
-        digitalWrite(pLED_BLUE, HIGH);
-        while(digitalRead(pBTN));
-        wait(250);
+    int valueSleep = sleep(digitalPinToInterrupt(pBTN), HIGH, 0);
 
+    if( valueSleep == MY_SLEEP_NOT_POSSIBLE )
+    {
+        #ifdef MY_DEBUG
+            Serial.println(">>> Unable to sleep");
+        #endif
+
+        for( int i=0 ; i<3 ; i++ )
+        {
+            digitalWrite(pLED_BLUE, HIGH);
+            wait(250);
+            digitalWrite(pLED_BLUE, LOW);
+            wait(100);
+        }
+    }
+    else if( valueSleep == digitalPinToInterrupt(pBTN) )
+    {
+        #ifdef MY_DEBUG
+            Serial.println(">>> Switch active");
+        #endif
+
+        digitalWrite(pLED_BLUE, HIGH);
         send(msgBTN.set(true));
-        send(msgBAT.set(readVcc()));
+        sendBatteryLevel(getBatteryLevel());
+        wait(500);
         digitalWrite(pLED_BLUE, LOW);
     }
-
-    sleep(digitalPinToInterrupt(pBTN), CHANGE, 0);
 }
 
 
@@ -89,7 +102,7 @@ void loop()
 /**
  * https://forum.arduino.cc/index.php?topic=356752.0
  */
-long readVcc()
+long getBatteryLevel()
 {
     long result;
     // Read 1.1V reference against AVcc
@@ -100,5 +113,10 @@ long readVcc()
     result = ADCL;
     result |= ADCH<<8;
     result = 1126400L / result; // Back-calculate AVcc in mV
+
+    #ifdef MY_DEBUG
+        Serial.print(">>> Battery: "); Serial.println(result);
+    #endif
+
     return result;
 }
