@@ -39,7 +39,7 @@
 //#define MY_REPEATER_FEATURE                       // Enable repeater functionality for this node
 #define MY_SMART_SLEEP_WAIT_DURATION_MS	1000        // The wait period (in ms) before going to sleep when using smartSleep-functions.
 #define MY_OTA_FIRMWARE_FEATURE                     // Define this in sketch to allow safe over-the-air firmware updates
-#define MY_OTA_FLASH_SS                 pFLASH_CS   // Slave select pin for external flash. (The bootloader must use the same pin)
+//#define MY_OTA_FLASH_SS               pFLASH_CS   // Slave select pin for external flash. (The bootloader must use the same pin)
 #define MY_OTA_FLASH_JDECID             0xEF30      // https://forum.mysensors.org/topic/4267/w25x40clsnig-as-flash-for-ota
 
 #define MS_BOARD_NAME                   "Sensor"

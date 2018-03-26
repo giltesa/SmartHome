@@ -1,4 +1,10 @@
 
+--- YYYY/MM -------------------------------------------------------------------------------------------------
+
+    + REMOTE CONTROL Vx.x.
+        - Change the voltage regulator from 24 to 5V, if the power supply provides more than 24V will burn,
+          it would be good to use one that had more margin.
+
 --- 2018/03 INITIAL VERSION ---------------------------------------------------------------------------------
 
     + LED RGBW CONTROLLER V1.0.
