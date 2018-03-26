@@ -1,0 +1,29 @@
+Partlist exported at 26/03/2018 22:46:55
+
+Assembly variant:
+
+Qty Value                  Device                 Parts
+1   Plastic Box                                   https://es.aliexpress.com/item/2colors-custom-abs-enclosure-boxes-for-electronic-projects-small-plastic-enclosure-junction-box-diy-led/32283996573.html?aff_platform=aaf&cpt=1522097806764&sk=rvbiMby&aff_trace_key=9e32f67798a944d2b59cb5d1bec5759d-1522097806764-08353-rvbiMby&terminal_id=e0270e8d6fd04fa796dbba684821830f
+1   ATMEGA328P             ATMEGA328P_TQFP        U1
+1   8MHz                   RESONATORMU            Y1 (OPTIONAL)
+1   NRF24L01               NRF24L01_SMD           U2
+4   FDD8447L               FDD8447L               Q1, Q2, Q3, Q4
+2   UCC27324               UCC27324               U4, U5
+1   SPI_FLASH-W25X40CLSNIG SPI_FLASH-X25XXSMD     FLASH
+1   ATSHA204A              IC_ATSHA204A_CRYPT     U3
+1   DS18B20                DS18B20                U6
+1   DC_CONVERTER           DC_CONVERTER           J4
+1   AMS1117-3.3            AMS1117SOT89_2         AMS1117-3.3
+1   AVRISP+UART            JST-8-1MM-SMD1         JST1
+1                          TERMINAL_5MM_3P        J1
+2                          TERMINAL_5MM_2P1       J2, J3
+3   10K                    R0603                  R3, R4, R10
+2   10K                    RESISTOR-ARRAY0603-ARV RR1, RR3
+1   4.7K                   R0603                  R11
+1   68R                    R0603                  R12
+1   10R                    RESISTOR-ARRAY0603-ARV RR2
+2   22uF                   CAP_POL3528            C11, C12
+2   10uF                   C0603                  C6, C9
+1   4.7uF                  C1206                  C1
+7   100nF                  C0603                  C2, C3, C4, C5, C7, C8, C10
+1   PWD                    LEDCHIP-LED0805        L1
