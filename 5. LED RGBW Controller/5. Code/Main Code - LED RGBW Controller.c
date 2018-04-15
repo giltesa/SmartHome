@@ -3,8 +3,8 @@
  * Autor:    Alberto Gil Tesa
  * Web:      https://giltesa.com/smarthome
  * License:  CC BY-NC-SA 4.0
- * Version:  1.0
- * Date:     2018/03/24
+ * Version:  1.0.2
+ * Date:     2018/04/05
  *
  */
 
@@ -39,7 +39,7 @@
 #define MY_OTA_FLASH_JDECID         0xEF30      // https://forum.mysensors.org/topic/4267/w25x40clsnig-as-flash-for-ota
 
 #define MS_BOARD_NAME               "LED RGBW Controller"
-#define MS_SOFTWARE_VERSION         "1.0"
+#define MS_SOFTWARE_VERSION         "1.0.2"
 #define MS_STATUS_CHILD_ID          0
 #define MS_RGB_CHILD_ID             1
 #define MS_RGBW_CHILD_ID            2
@@ -158,10 +158,7 @@ void receive(const MyMessage &message)
                 led.w = 128;
             }
 
-            analogWrite(pLED_RED,   status ? led.r : 0);
-            analogWrite(pLED_GREEN, status ? led.g : 0);
-            analogWrite(pLED_BLUE,  status ? led.b : 0);
-            analogWrite(pLED_WHITE, status ? led.w : 0);
+            fadeLed(status, led);
         }
         else if( message.type == V_RGB || message.type == V_RGBW )
         {
@@ -188,10 +185,11 @@ void receive(const MyMessage &message)
         }
         else if( message.type == V_DIMMER )
         {
+            led.r = led.g = led.b = 0;
             led.w = map(message.getInt(), 0, 100, 0, 255);
-            analogWrite(pLED_RED,   0);
-            analogWrite(pLED_GREEN, 0);
-            analogWrite(pLED_BLUE,  0);
+            analogWrite(pLED_RED,   led.r);
+            analogWrite(pLED_GREEN, led.g);
+            analogWrite(pLED_BLUE,  led.b);
             analogWrite(pLED_WHITE, led.w);
 
             send(msgSTAT.set(led.w > 0));
@@ -265,5 +263,41 @@ void setLedColor( char color )
             digitalWrite(pLED_BLUE,  LOW);
             digitalWrite(pLED_WHITE, LOW);
             break;
+    }
+}
+
+
+
+/**
+ * Activate or deactivate the light gradually.
+ * The code is not perfect...
+ */
+void fadeLed( bool status, RGBW led )
+{
+    if( status )
+    {
+        byte r=0, g=0, b=0, w=0;
+
+        while( r != led.r || g != led.g || b != led.b || w != led.w )
+        {
+            analogWrite(pLED_RED,   (r= r < led.r ? r+1 : led.r));
+            analogWrite(pLED_GREEN, (g= g < led.g ? g+1 : led.g));
+            analogWrite(pLED_BLUE,  (b= b < led.b ? b+1 : led.b));
+            analogWrite(pLED_WHITE, (w= w < led.w ? w+1 : led.w));
+            wait(10);
+        }
+    }
+    else
+    {
+        byte r=led.r, g=led.g, b=led.b, w=led.w;
+
+        while( r != 0 || g != 0 || b != 0 || w != 0 )
+        {
+            analogWrite(pLED_RED,   (r= r-1 > 0 ? r-1 : 0));
+            analogWrite(pLED_GREEN, (g= g-1 > 0 ? g-1 : 0));
+            analogWrite(pLED_BLUE,  (b= b-1 > 0 ? b-1 : 0));
+            analogWrite(pLED_WHITE, (w= w-1 > 0 ? w-1 : 0));
+            wait(10);
+        }
     }
 }

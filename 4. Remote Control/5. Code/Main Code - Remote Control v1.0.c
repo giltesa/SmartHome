@@ -3,8 +3,8 @@
  * Autor:    Alberto Gil Tesa
  * Web:      https://giltesa.com/smarthome
  * License:  CC BY-NC-SA 3.0
- * Version:  1.0
- * Date:     2018/03/24
+ * Version:  1.1
+ * Date:     2018/04/06
  *
  */
 
@@ -24,14 +24,14 @@
 /**
  * MySensor configuration:
  */
-#define MY_DEBUG                        // Enable debug prints to serial monitor
+//#define MY_DEBUG                        // Enable debug prints to serial monitor
 #define MY_BAUD_RATE        9600        // Serial output baud rate
 #define MY_RADIO_NRF24                  // Enable and select radio type attached
 #define MY_RF24_CE_PIN      pNRF_CE     // Define this to change the chip enable pin from the default
 #define MY_RF24_CS_PIN      pNRF_CS     // Define this to change the chip select pin from the default
 
 #define MS_BOARD_NAME       "Remote Control"
-#define MS_SOFTWARE_VERSION "1.0"
+#define MS_SOFTWARE_VERSION "1.1"
 #define MS_BTN_CHILD_ID     0
 
 #include <MySensors.h>
@@ -41,12 +41,25 @@ MyMessage msgBTN(MS_BTN_CHILD_ID, V_TRIPPED);
 
 
 /**
+ * For initialisations that needs to take place before MySensors transport has been setup (eg: SPI devices).
+ */
+void before()
+{
+    pinMode(pBTN,      INPUT_PULLUP);
+    pinMode(pLED_BLUE, OUTPUT);
+
+    digitalWrite(pLED_BLUE, HIGH);
+    delay(3000);
+    digitalWrite(pLED_BLUE, LOW);
+}
+
+
+
+/**
  * Called once at startup, usually used to initialize sensors.
  */
 void setup()
 {
-    pinMode(pBTN,      INPUT);
-    pinMode(pLED_BLUE, OUTPUT);
 }
 
 
@@ -67,7 +80,7 @@ void presentation()
  */
 void loop()
 {
-    int valueSleep = sleep(digitalPinToInterrupt(pBTN), HIGH, 0);
+    int valueSleep = sleep(digitalPinToInterrupt(pBTN), LOW, 0);
 
     if( valueSleep == MY_SLEEP_NOT_POSSIBLE )
     {
